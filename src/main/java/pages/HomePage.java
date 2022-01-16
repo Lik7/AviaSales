@@ -2,9 +2,10 @@ package pages;
 
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.PageFactory;
+import testData.TestData;
 import utils.Dates;
 
 import java.util.List;
@@ -14,38 +15,31 @@ public class HomePage {
 
     public HomePage(WebDriver driver) {
         this.driver = driver;
-        //ageFactory.initElements((driver), this);
     }
 
-    /*  @FindBy (css = "#origin")
-      private By startCity;//поле Откуда
-
-      @FindBy (css = "#destination")
-      private By finishCity;//поле Откуда
-  */
-    private By startCity = By.cssSelector("#origin"); //поле Откуда
-    private By finishCity = By.cssSelector("#destination"); //поле Куда
+    private By originCity = By.cssSelector("#origin"); //поле Откуда
+    private By destinationCity = By.cssSelector("#destination"); //поле Куда
     private By whenField = By.cssSelector("[data-test-id=\"departure-date-field\"]"); //поле Куда
 
-    private By thereDate = By.xpath("//*[contains(@aria-label, \"" + Dates.getDateMmmDDYYYYTomorrow() + "\")]");
-    private By backDate = By.xpath("//*[contains(@aria-label, \"" + Dates.getDateMmmDDYYYYAfterTomorrow() + "\")]");
+    private By thereDate = By.xpath("//*[contains(@aria-label, \"" + Dates.getDateMmmDDYYYYTomorrow() + "\")]");//дата вылета
+    private By backDate = By.xpath("//*[contains(@aria-label, \"" + Dates.getDateMmmDDYYYYAfterTomorrow() + "\")]");//дата прилета
 
     private By passengersAndClassField = By.cssSelector("[data-test-id=\"passengers-field\"]");
     private By addRemovePassengerBtn = By.cssSelector(".additional-fields__passenger-control");
 
-    private By findBtn = By.cssSelector("[data-test-id=\"form-submit\"]");
+    private By findBtn = By.cssSelector("[data-test-id=\"form-submit\"]");//кнопка Найти
 
 
     @Step("Ввести город вылета")
     public void enterStartCity() {
-        driver.findElement(startCity).clear();
-        driver.findElement(startCity).sendKeys("Москва");
+        driver.findElement(originCity).sendKeys(Keys.chord(Keys.CONTROL, "a", Keys.DELETE));
+        driver.findElement(originCity).sendKeys(TestData.getStartCity());
     }
 
     @Step("Ввести город прилета")
     public void enterFinishCity() {
-        driver.findElement(finishCity).clear();
-        driver.findElement(finishCity).sendKeys("Санкт-Петербург");
+        driver.findElement(destinationCity).clear();
+        driver.findElement(destinationCity).sendKeys(TestData.getFinishCity());
     }
 
     @Step("Клик в поле Куда")
@@ -73,12 +67,9 @@ public class HomePage {
     }
 
     @Step("Нажать кнопку Найти")
-    public ResultPage findBtnPress(){
+    public ResultPage findBtnPress() {
+        driver.findElement(By.cssSelector("[for=\"clicktripz\"]")).click();
         driver.findElement(findBtn).click();
         return new ResultPage(driver);
     }
-
 }
-/*
-        WebDriverWait webDriverWait = new WebDriverWait(driver, 5);
-        webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(screwdriver));*/
