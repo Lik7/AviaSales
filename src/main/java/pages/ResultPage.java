@@ -28,17 +28,18 @@ public class ResultPage {
     @Step("Проверка, что цена отсортирована по возрастанию")
     public void checkSortPrice() {
         waitPricesBlock();
-        List<String> expectedData = driver.findElements(priceOfTicket).stream().map(data -> data.getText()).sorted().collect(Collectors.toList());
-        List<String> actualData = driver.findElements(priceOfTicket).stream().map(data -> data.getText()).collect(Collectors.toList());
-        Assert.assertEquals(expectedData, actualData, "Цена отсортирована не по возростанию");
+        List<WebElement> webElementList = driver.findElements(priceOfTicket);
+        List<String> expectedResult = webElementList.stream().map(data -> data.getText()).sorted().collect(Collectors.toList());
+        List<String> actualResult = webElementList.stream().map(data -> data.getText()).collect(Collectors.toList());
+        Assert.assertEquals(expectedResult, actualResult, "Цена отсортирована не по возростанию");
     }
 
     @Step("Проверка правильности города вылета")
     public void checkStartCityInTicket() {
         waitPricesBlock();
 
-        List<WebElement> actual = driver.findElements(startCityOfTicket);
-        List<String> actualData = actual.stream().map(data -> data.getText()).collect(Collectors.toList());
+        List<WebElement> webElementList = driver.findElements(startCityOfTicket);
+        List<String> actualData = webElementList.stream().map(data -> data.getText()).collect(Collectors.toList());
         for (int i = 0; i < actualData.size(); i = i + 2) {
             //System.out.println(actualData.get(i));
             Assert.assertEquals(TestData.getStartCity(), actualData.get(i), "Город вылета не " + TestData.getStartCity());
@@ -54,8 +55,8 @@ public class ResultPage {
     public void checkFinishCityInTicket() {
         waitPricesBlock();
 
-        List<WebElement> actual = driver.findElements(finishCityOfTicket);
-        List<String> actualData = actual.stream().map(data -> data.getText()).collect(Collectors.toList());
+        List<WebElement> webElementList = driver.findElements(finishCityOfTicket);
+        List<String> actualData = webElementList.stream().map(data -> data.getText()).collect(Collectors.toList());
         for (int i = 0; i < actualData.size(); i = i + 2) {
             //System.out.println(actualData.get(i));
             Assert.assertEquals(TestData.getFinishCity(), actualData.get(i), "Город прилета не " + TestData.getFinishCity());
@@ -70,8 +71,8 @@ public class ResultPage {
     public void checkStartDateInTicket() {
         waitPricesBlock();
 
-        List<WebElement> actual = driver.findElements(startDateOfTicket);
-        List<String> actualData = actual.stream().map(data -> data.getText()).collect(Collectors.toList());
+        List<WebElement> webElementList = driver.findElements(startDateOfTicket);
+        List<String> actualData = webElementList.stream().map(data -> data.getText()).collect(Collectors.toList());
         for (int i = 0; i < actualData.size(); i = i + 2) {
             //System.out.println(actualData.get(i));
             Assert.assertEquals(TestData.getDateDDMmmYYYYTomorrow(), actualData.get(i).substring(0, 11), "Дата вылета не " + TestData.getDateDDMmmYYYYTomorrow());
@@ -85,6 +86,6 @@ public class ResultPage {
 
     private void waitPricesBlock() {
         WebDriverWait webDriverWait = new WebDriverWait(driver, 60);
-        webDriverWait.until(ExpectedConditions.presenceOfElementLocated(otherPricesTitle));
+        webDriverWait.until(ExpectedConditions.presenceOfElementLocated(otherPricesTitle));//ожидание загрузки блока с ценами на соседние даты и соотв. загрузки всех билетов
     }
 }

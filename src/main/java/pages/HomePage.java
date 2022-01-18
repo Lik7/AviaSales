@@ -19,12 +19,12 @@ public class HomePage {
 
     private By originCity = By.cssSelector("#origin"); //поле Откуда
     private By destinationCity = By.cssSelector("#destination"); //поле Куда
-    private By whenField = By.cssSelector("[data-test-id=\"departure-date-field\"]"); //поле Куда
+    private By whenField = By.cssSelector("[data-test-id=\"departure-date-field\"]"); //поле Когда
 
     private By thereDate = By.xpath("//*[contains(@aria-label, \"" + Dates.getDateMmmDDYYYYTomorrow() + "\")]");//дата вылета
     private By backDate = By.xpath("//*[contains(@aria-label, \"" + Dates.getDateMmmDDYYYYAfterTomorrow() + "\")]");//дата прилета
 
-    private By passengersAndClassField = By.cssSelector("[data-test-id=\"passengers-field\"]");
+    private By passengersAndClassField = By.cssSelector("[data-test-id=\"passengers-field\"]");//пассажиры
     private By addRemovePassengerBtn = By.cssSelector(".additional-fields__passenger-control");
 
     private By findBtn = By.cssSelector("[data-test-id=\"form-submit\"]");//кнопка Найти
@@ -50,12 +50,6 @@ public class HomePage {
     @Step("Выбор дат полета")
     public void changeDatesOfFly() {
         driver.findElement(thereDate).click();
-        driver.findElement(backDate).click();
-    }
-
-    @Step("Выбор пассажиров и класса")
-    public void changePassengersAndClass() {
-        driver.findElement(passengersAndClassField).click();
         driver.findElement(backDate).click();
     }
 

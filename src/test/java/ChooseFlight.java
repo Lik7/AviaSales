@@ -5,8 +5,8 @@ import pages.ResultPage;
 
 
 public class ChooseFlight extends BaseTest {
-    @Test
 
+    @Test
     public void testChooseFlight() {
         homePage.enterStartCity();
         homePage.enterFinishCity();
