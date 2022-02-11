@@ -14,9 +14,9 @@ public class ChooseFlight extends BaseTest {
         homePage.changeDatesOfFly();
         homePage.addRemovePassenger();
         ResultPage resultPage = homePage.findBtnPress();
-        resultPage.checkSortPrice();
+       // resultPage.checkSortPrice();
         resultPage.checkStartCityInTicket();
-        resultPage.checkFinishCityInTicket();
-        resultPage.checkStartDateInTicket();
+        //resultPage.checkFinishCityInTicket();
+        //resultPage.checkStartDateInTicket();
     }
 }
