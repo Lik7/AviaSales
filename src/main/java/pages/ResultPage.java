@@ -9,7 +9,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import testData.TestData;
+import testData.Cities;
+import testData.Dates;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,7 +57,7 @@ public class ResultPage {
         List<String> actualData = createTicketsList().stream().map(data -> data.getStartCity()).collect(Collectors.toList());
         for (int i = 0; i < actualData.size(); i++) {
             System.out.println(actualData.get(i));
-            Assert.assertEquals(TestData.getStartCity(), actualData.get(i), "Город вылета не " + TestData.getStartCity());
+            Assert.assertEquals(Cities.MOSCOW.getCity(), actualData.get(i), "Город вылета не " + Cities.MOSCOW.getCity());
         }
     }
 
@@ -66,7 +67,7 @@ public class ResultPage {
         List<String> actualData = createTicketsList().stream().map(data -> data.getFinishCity()).collect(Collectors.toList());
         for (int i = 0; i < actualData.size(); i++) {
             System.out.println(actualData.get(i));
-            Assert.assertEquals(TestData.getFinishCity(), actualData.get(i), "Город вылета не " + TestData.getFinishCity());
+            Assert.assertEquals(Cities.ST_PETERSBURG.getCity(), actualData.get(i), "Город вылета не " + Cities.ST_PETERSBURG.getCity());
         }
     }
 
@@ -78,12 +79,12 @@ public class ResultPage {
         List<String> actualData = webElementList.stream().map(data -> data.getText()).collect(Collectors.toList());
         for (int i = 0; i < actualData.size(); i = i + 2) {
             //System.out.println(actualData.get(i));
-            Assert.assertEquals(TestData.getDateDDMmmYYYYTomorrow(), actualData.get(i).substring(0, 11), "Дата вылета не " + TestData.getDateDDMmmYYYYTomorrow());
+            Assert.assertEquals(Dates.getDateDDMmmYYYYTomorrow_RUS(), actualData.get(i).substring(0, 11), "Дата вылета не " + Dates.getDateDDMmmYYYYTomorrow_RUS());
         }
 
         for (int i = 1; i < actualData.size(); i = i + 2) {
             //System.out.println(actualData.get(i));
-            Assert.assertEquals(TestData.getDateDDMmmYYYYAfterTomorrow(), actualData.get(i).substring(0, 11), "Дата вылета не " + TestData.getDateDDMmmYYYYAfterTomorrow());
+            Assert.assertEquals(Dates.getDateDDMmmYYYYAfterTomorrow_RUS(), actualData.get(i).substring(0, 11), "Дата вылета не " + Dates.getDateDDMmmYYYYAfterTomorrow_RUS());
         }
     }
 

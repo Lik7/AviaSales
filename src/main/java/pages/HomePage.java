@@ -5,8 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import testData.TestData;
-import utils.Dates;
+import testData.Dates;
 
 import java.util.List;
 
@@ -21,8 +20,8 @@ public class HomePage {
     private By destinationCity = By.cssSelector("#destination"); //поле Куда
     private By whenField = By.cssSelector("[data-test-id=\"departure-date-field\"]"); //поле Когда
 
-    private By thereDate = By.xpath("//*[contains(@aria-label, \"" + Dates.getDateMmmDDYYYYTomorrow() + "\")]");//дата вылета
-    private By backDate = By.xpath("//*[contains(@aria-label, \"" + Dates.getDateMmmDDYYYYAfterTomorrow() + "\")]");//дата прилета
+    private By thereDate = By.xpath("//*[contains(@aria-label, \"" + Dates.getDateDDMmmYYYYTomorrow_EN() + "\")]");//дата вылета
+    private By backDate = By.xpath("//*[contains(@aria-label, \"" + Dates.getDateDDMmmYYYYAfterTomorrow_EN() + "\")]");//дата прилета
 
     private By passengersAndClassField = By.cssSelector("[data-test-id=\"passengers-field\"]");//пассажиры
     private By addRemovePassengerBtn = By.cssSelector(".additional-fields__passenger-control");
@@ -31,15 +30,15 @@ public class HomePage {
 
 
     @Step("Ввести город вылета")
-    public void enterStartCity() {
-        driver.findElement(originCity).sendKeys(Keys.chord(Keys.CONTROL, "a", Keys.DELETE));
-        driver.findElement(originCity).sendKeys(TestData.getStartCity());
+    public void enterStartCity(String startCity) {
+        driver.findElement(originCity).sendKeys(Keys.chord(Keys.CONTROL, "a", Keys.DELETE));//очищает поле от предзаполненного значения
+        driver.findElement(originCity).sendKeys(startCity);
     }
 
     @Step("Ввести город прилета")
-    public void enterFinishCity() {
+    public void enterFinishCity(String finishCity) {
         driver.findElement(destinationCity).clear();
-        driver.findElement(destinationCity).sendKeys(TestData.getFinishCity());
+        driver.findElement(destinationCity).sendKeys(finishCity);
     }
 
     @Step("Клик в поле Куда")
