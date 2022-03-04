@@ -1,13 +1,16 @@
 package businessObjects;
 
 public class Ticket {
-private String price;
-private String startCity;
-private String finishCity;
-private String startDate;
+    private String price;
+    private String startCityThereTicket;
+    private String finishCityThereTicket;
+    private String startCityBackTicket;
+    private String finishCityBackTicket;
+    private String startDate;
 
     public String getPrice() {
         System.out.println("Цена из класса Ticket " + price);
+
         return price;
     }
 
@@ -16,23 +19,48 @@ private String startDate;
         return this;
     }
 
-    public String getStartCity() {
-        System.out.println("Город вылета из класса Ticket " + startCity);
+    public String getStartCityThereTicket() {
+        System.out.println("Город вылета из класса Ticket " + startCityThereTicket);
 
-        return startCity;
+        return startCityThereTicket;
     }
 
-    public Ticket setStartCity(String startCity) {
-        this.startCity = startCity;
+/*    public Ticket setStartCityThereTicket(String startCityThereTicket) {
+        this.startCityThereTicket = startCityThereTicket;
+        return this;
+    }*/
+
+    public Ticket setStartCityThereTicket(String startCityThereTicket) {
+        this.startCityThereTicket = startCityThereTicket;
+        System.out.println("Метод setStartCityThereTicket класса Ticket " + startCityThereTicket);
         return this;
     }
 
-    public String getFinishCity() {
-        return finishCity;
+    public String getFinishCityThereTicket() {
+        return finishCityThereTicket;
     }
 
-    public Ticket setFinishCity(String finishCity) {
-        this.finishCity = finishCity;
+    public Ticket setFinishCityThereTicket(String finishCityThereTicket) {
+        this.finishCityThereTicket = finishCityThereTicket;
+        System.out.println("Метод setFinishCityThereTicket класса Ticket " + finishCityThereTicket);
+        return this;
+    }
+
+    public String getStartCityBackTicket() {
+        return startCityBackTicket;
+    }
+
+    public Ticket setStartCityBackTicket(String startCityBackTicket) {
+        this.startCityBackTicket = startCityBackTicket;
+        return this;
+    }
+
+    public String getFinishCityBackTicket() {
+        return finishCityBackTicket;
+    }
+
+    public Ticket setFinishCityBackTicket(String finishCityBackTicket) {
+        this.finishCityBackTicket = finishCityBackTicket;
         return this;
     }
 

@@ -46,6 +46,7 @@ public class ResultPage {
     public void checkSortPrice() {
         waitPricesBlock();
         List<WebElement> webElementList = driver.findElements(priceOfTicket);
+
         List<String> expectedResult = webElementList.stream().map(data -> data.getText()).sorted().collect(Collectors.toList());
         List<String> actualResult = webElementList.stream().map(data -> data.getText()).collect(Collectors.toList());
         Assert.assertEquals(expectedResult, actualResult, "Цена отсортирована не по возростанию");
@@ -54,17 +55,22 @@ public class ResultPage {
     @Step("Проверка правильности города вылета")
     public void checkStartCityInTicket() {
         waitPricesBlock();
-        List<String> actualData = createTicketsList().stream().map(data -> data.getStartCity()).collect(Collectors.toList());
-        for (int i = 0; i < actualData.size(); i++) {
-            System.out.println(actualData.get(i));
-            Assert.assertEquals(Cities.MOSCOW.getCity(), actualData.get(i), "Город вылета не " + Cities.MOSCOW.getCity());
+        List<String> actualDataCityThere = createTicketsList().stream().map(data -> data.getStartCityThereTicket()).collect(Collectors.toList());
+        for (int i = 0; i < actualDataCityThere.size(); i++) {
+            System.out.println(actualDataCityThere.get(i));
+            Assert.assertEquals(Cities.MOSCOW.getCity(), actualDataCityThere.get(i), "Город вылета не " + Cities.MOSCOW.getCity());
+        }
+        List<String> actualDataCityBack = createTicketsList().stream().map(data -> data.getStartCityBackTicket()).collect(Collectors.toList());
+        for (int i = 0; i < actualDataCityBack.size(); i++) {
+            System.out.println(actualDataCityBack.get(i));
+            Assert.assertEquals(Cities.ST_PETERSBURG.getCity(), actualDataCityBack.get(i), "Город вылета не " + Cities.ST_PETERSBURG.getCity());
         }
     }
 
     @Step("Проверка правильности города прилета")
     public void checkFinishCityInTicket() {
         waitPricesBlock();
-        List<String> actualData = createTicketsList().stream().map(data -> data.getFinishCity()).collect(Collectors.toList());
+        List<String> actualData = createTicketsList().stream().map(data -> data.getFinishCityThereTicket()).collect(Collectors.toList());
         for (int i = 0; i < actualData.size(); i++) {
             System.out.println(actualData.get(i));
             Assert.assertEquals(Cities.ST_PETERSBURG.getCity(), actualData.get(i), "Город вылета не " + Cities.ST_PETERSBURG.getCity());
@@ -93,20 +99,3 @@ public class ResultPage {
         webDriverWait.until(ExpectedConditions.presenceOfElementLocated(otherPricesTitle));//ожидание загрузки блока с ценами на соседние даты и соотв. загрузки всех билетов
     }
 }
-
-    /*@Step("Проверка правильности города прилета")
-    public void checkFinishCityInTicket() {
-        waitPricesBlock();
-
-        List<WebElement> webElementList = driver.findElements(finishCityOfTicket);
-        List<String> actualData = webElementList.stream().map(data -> data.getText()).collect(Collectors.toList());
-        for (int i = 0; i < actualData.size(); i = i + 2) {
-            //System.out.println(actualData.get(i));
-            Assert.assertEquals(TestData.getFinishCity(), actualData.get(i), "Город прилета не " + TestData.getFinishCity());
-        }
-
-        for (int i = 1; i < actualData.size(); i = i + 2) {
-            //System.out.println(actualData.get(i));
-            Assert.assertEquals(TestData.getStartCity(), actualData.get(i), "Город прилета не " + TestData.getStartCity());
-        }
-    }*/

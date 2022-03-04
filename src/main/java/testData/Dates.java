@@ -7,17 +7,6 @@ import java.util.Locale;
 
 public class Dates {
 
-    //private static String startCity = "Москва";//заданный город вылета
-    //private static String finishCity = "Санкт-Петербург";//заданный город прилета
-
- /*   public static String getStartCity() {
-        return startCity;
-    }
-
-    public static String getFinishCity() {
-        return finishCity;
-    }*/
-
     //дата вылета завтра
     public static String getDateDDMmmYYYYTomorrow_RUS(){
         return getDateMmmDDYYYY_RUS(1);

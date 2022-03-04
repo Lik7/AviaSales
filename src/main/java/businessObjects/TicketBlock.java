@@ -3,6 +3,8 @@ package businessObjects;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import java.util.List;
+
 public class TicketBlock {
     private WebElement element;
 
@@ -15,16 +17,24 @@ public class TicketBlock {
         this.element = element;
     }
 
+    //List <WebElement> startCity = element.findElements(startCityOfTicket);//города вылета в билете
+
+    //получаем одни билет
     public Ticket getTicket() {
         String price = element.findElement(priceOfTicket).getText();
-        String startCity = element.findElement(startCityOfTicket).getText();
-        String finishCity = element.findElement(finishCityOfTicket).getText();
+        //String startCity = element.findElement(startCityOfTicket).getText();
+        List <WebElement> startCity = element.findElements(startCityOfTicket);//города вылета в билете
+
+        //String finishCity = element.findElement(finishCityOfTicket).getText();
+        List<WebElement> finishCity = element.findElements(finishCityOfTicket);
         String startDate = element.findElement(startDateOfTicket).getText();
 
         Ticket ticket = new Ticket()
                 .setPrice(price)
-                .setStartCity(startCity)
-                .setFinishCity(finishCity)
+                .setStartCityThereTicket(startCity.get(0).getText())
+                .setStartCityBackTicket(startCity.get(1).getText())
+                .setFinishCityThereTicket(finishCity.get(0).getText())
+                .setFinishCityBackTicket(finishCity.get(1).getText())
                 .setStartDate(startDate);
 
         return ticket;
