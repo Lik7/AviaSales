@@ -1,5 +1,8 @@
 package businessObjects;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class Ticket {
     private String price;
     private String startCityThereTicket;
@@ -8,10 +11,16 @@ public class Ticket {
     private String finishCityBackTicket;
     private String startDate;
 
-    public String getPrice() {
-        System.out.println("Цена из класса Ticket " + price);
-
-        return price;
+    public int getPrice() {
+        Pattern p = Pattern.compile("\\d+");
+        Matcher m = p.matcher(price);
+        String str = null;
+        if (m.find()) {
+            //System.out.println(m.group());
+            str = m.group();
+        }
+        //System.out.println("Цена из класса Ticket " + price);
+        return Integer.parseInt(str);
     }
 
     public Ticket setPrice(String price) {
@@ -20,15 +29,10 @@ public class Ticket {
     }
 
     public String getStartCityThereTicket() {
-        System.out.println("Город вылета из класса Ticket " + startCityThereTicket);
+        System.out.println("Метод getStartCityThereTicket класса Ticket " + startCityThereTicket);
 
         return startCityThereTicket;
     }
-
-/*    public Ticket setStartCityThereTicket(String startCityThereTicket) {
-        this.startCityThereTicket = startCityThereTicket;
-        return this;
-    }*/
 
     public Ticket setStartCityThereTicket(String startCityThereTicket) {
         this.startCityThereTicket = startCityThereTicket;
@@ -52,6 +56,7 @@ public class Ticket {
 
     public Ticket setStartCityBackTicket(String startCityBackTicket) {
         this.startCityBackTicket = startCityBackTicket;
+        System.out.println("Метод setStartCityBackTicket класса Ticket " + startCityBackTicket);
         return this;
     }
 
@@ -61,6 +66,7 @@ public class Ticket {
 
     public Ticket setFinishCityBackTicket(String finishCityBackTicket) {
         this.finishCityBackTicket = finishCityBackTicket;
+        System.out.println("Метод setFinishCityBackTicket класса Ticket " + finishCityBackTicket);
         return this;
     }
 
@@ -73,3 +79,8 @@ public class Ticket {
         return this;
     }
 }
+
+/*    public Ticket setStartCityThereTicket(String startCityThereTicket) {
+        this.startCityThereTicket = startCityThereTicket;
+        return this;
+    }*/

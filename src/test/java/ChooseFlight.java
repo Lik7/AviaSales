@@ -19,7 +19,7 @@ public class ChooseFlight extends BaseTest {
         ResultPage resultPage = homePage.findBtnPress();
        // resultPage.checkSortPrice();
         resultPage.checkStartCityInTicket();
-        //resultPage.checkFinishCityInTicket();
+        resultPage.checkFinishCityInTicket();
         //resultPage.checkStartDateInTicket();
     }
 }

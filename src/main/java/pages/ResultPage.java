@@ -70,10 +70,15 @@ public class ResultPage {
     @Step("Проверка правильности города прилета")
     public void checkFinishCityInTicket() {
         waitPricesBlock();
-        List<String> actualData = createTicketsList().stream().map(data -> data.getFinishCityThereTicket()).collect(Collectors.toList());
-        for (int i = 0; i < actualData.size(); i++) {
-            System.out.println(actualData.get(i));
-            Assert.assertEquals(Cities.ST_PETERSBURG.getCity(), actualData.get(i), "Город вылета не " + Cities.ST_PETERSBURG.getCity());
+        List<String> actualDataCityThere = createTicketsList().stream().map(data -> data.getFinishCityThereTicket()).collect(Collectors.toList());
+        for (int i = 0; i < actualDataCityThere.size(); i++) {
+            System.out.println(actualDataCityThere.get(i));
+            Assert.assertEquals(Cities.ST_PETERSBURG.getCity(), actualDataCityThere.get(i), "Город вылета не " + Cities.ST_PETERSBURG.getCity());
+        }
+        List<String> actualDataCityBack = createTicketsList().stream().map(data -> data.getFinishCityBackTicket()).collect(Collectors.toList());
+        for (int i = 0; i < actualDataCityBack.size(); i++) {
+            System.out.println(actualDataCityBack.get(i));
+            Assert.assertEquals(Cities.MOSCOW.getCity(), actualDataCityBack.get(i), "Город вылета не " + Cities.MOSCOW.getCity());
         }
     }
 
