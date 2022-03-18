@@ -11,6 +11,7 @@ public class Ticket {
     private String finishCityBackTicket;
     private String startDate;
 
+    //достаем из цены через регулярку цифры и парсим в int
     public int getPrice() {
         Pattern p = Pattern.compile("\\d+");
         Matcher m = p.matcher(price);
@@ -19,7 +20,7 @@ public class Ticket {
             //System.out.println(m.group());
             str = m.group();
         }
-        //System.out.println("Цена из класса Ticket " + price);
+        System.out.println("Цена из класса Ticket " + Integer.parseInt(str));
         return Integer.parseInt(str);
     }
 
