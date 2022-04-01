@@ -26,8 +26,6 @@ public class ResultPage {
     private By otherPricesTitle = By.cssSelector(".calendar-matrix-dates");//блок Цены на соседние даты
     private By blockTicket = By.xpath("//*[@data-test-id=\"ticket-desktop\"]"); //блок билета
     private By priceOfTicket = By.xpath("//*[@data-test-id=\"ticket-desktop\"] //*[@data-test-id=\"price\"]"); //цена
-   // private By startCityOfTicket = By.xpath("//*[@data-test-id=\"ticket-desktop\"]//*[@data-test-id=\"origin-endpoint\"] //*[@data-test-id=\"city\"]");//город вылета в билете
-   // private By finishCityOfTicket = By.xpath("//*[@data-test-id=\"ticket-desktop\"]//*[@data-test-id=\"destination-endpoint\"] //*[@data-test-id=\"city\"]");//город прилета в билете
     private By startDateOfTicket = By.xpath("//*[@data-test-id=\"ticket-desktop\"]//*[@data-test-id=\"origin-endpoint\"] //*[@data-test-id=\"date\"]");//дата вылета в билете
 
     //создаю коллекцию билетов
@@ -45,10 +43,8 @@ public class ResultPage {
     @Step("Проверка, что цена отсортирована по возрастанию")
     public void checkSortPrice() {
         waitPricesBlock();
-        List<WebElement> webElementList = driver.findElements(priceOfTicket);
-
-        List<String> expectedResult = webElementList.stream().map(data -> data.getText()).sorted().collect(Collectors.toList());
-        List<String> actualResult = webElementList.stream().map(data -> data.getText()).collect(Collectors.toList());
+        List<Integer> expectedResult = createTicketsList().stream().map(data -> data.getPrice()).sorted().collect(Collectors.toList());
+        List<Integer> actualResult = createTicketsList().stream().map(data -> data.getPrice()).collect(Collectors.toList());
         Assert.assertEquals(expectedResult, actualResult, "Цена отсортирована не по возростанию");
     }
 
@@ -57,12 +53,12 @@ public class ResultPage {
         waitPricesBlock();
         List<String> actualDataCityThere = createTicketsList().stream().map(data -> data.getStartCityThereTicket()).collect(Collectors.toList());
         for (int i = 0; i < actualDataCityThere.size(); i++) {
-            System.out.println(actualDataCityThere.get(i));
+            //System.out.println(actualDataCityThere.get(i));
             Assert.assertEquals(Cities.MOSCOW.getCity(), actualDataCityThere.get(i), "Город вылета не " + Cities.MOSCOW.getCity());
         }
         List<String> actualDataCityBack = createTicketsList().stream().map(data -> data.getStartCityBackTicket()).collect(Collectors.toList());
         for (int i = 0; i < actualDataCityBack.size(); i++) {
-            System.out.println(actualDataCityBack.get(i));
+            //System.out.println(actualDataCityBack.get(i));
             Assert.assertEquals(Cities.ST_PETERSBURG.getCity(), actualDataCityBack.get(i), "Город вылета не " + Cities.ST_PETERSBURG.getCity());
         }
     }
@@ -72,12 +68,12 @@ public class ResultPage {
         waitPricesBlock();
         List<String> actualDataCityThere = createTicketsList().stream().map(data -> data.getFinishCityThereTicket()).collect(Collectors.toList());
         for (int i = 0; i < actualDataCityThere.size(); i++) {
-            System.out.println(actualDataCityThere.get(i));
+            //System.out.println(actualDataCityThere.get(i));
             Assert.assertEquals(Cities.ST_PETERSBURG.getCity(), actualDataCityThere.get(i), "Город вылета не " + Cities.ST_PETERSBURG.getCity());
         }
         List<String> actualDataCityBack = createTicketsList().stream().map(data -> data.getFinishCityBackTicket()).collect(Collectors.toList());
         for (int i = 0; i < actualDataCityBack.size(); i++) {
-            System.out.println(actualDataCityBack.get(i));
+            //System.out.println(actualDataCityBack.get(i));
             Assert.assertEquals(Cities.MOSCOW.getCity(), actualDataCityBack.get(i), "Город вылета не " + Cities.MOSCOW.getCity());
         }
     }
@@ -86,16 +82,10 @@ public class ResultPage {
     public void checkStartDateInTicket() {
         waitPricesBlock();
 
-        List<WebElement> webElementList = driver.findElements(startDateOfTicket);
-        List<String> actualData = webElementList.stream().map(data -> data.getText()).collect(Collectors.toList());
-        for (int i = 0; i < actualData.size(); i = i + 2) {
+        List<String> actualData = createTicketsList().stream().map(data -> data.getStartDate()).collect(Collectors.toList());
+        for (int i = 0; i < actualData.size(); i++) {
             //System.out.println(actualData.get(i));
-            Assert.assertEquals(Dates.getDateDDMmmYYYYTomorrow_RUS(), actualData.get(i).substring(0, 11), "Дата вылета не " + Dates.getDateDDMmmYYYYTomorrow_RUS());
-        }
-
-        for (int i = 1; i < actualData.size(); i = i + 2) {
-            //System.out.println(actualData.get(i));
-            Assert.assertEquals(Dates.getDateDDMmmYYYYAfterTomorrow_RUS(), actualData.get(i).substring(0, 11), "Дата вылета не " + Dates.getDateDDMmmYYYYAfterTomorrow_RUS());
+            Assert.assertEquals(Dates.getDateDDMmmYYYYTomorrow_RUS(), actualData.get(i).substring(0, 10), "Дата вылета не " + Dates.getDateDDMmmYYYYTomorrow_RUS());
         }
     }
 

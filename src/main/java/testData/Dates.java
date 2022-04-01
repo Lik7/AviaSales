@@ -27,7 +27,7 @@ public class Dates {
     }
 
     private static String getDateMmmDDYYYY_RUS(int n) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMM yyyy");
         LocalDate todayDayPlusNDays = LocalDate.now().plusDays(n);
         return formatter.format(todayDayPlusNDays);
     }

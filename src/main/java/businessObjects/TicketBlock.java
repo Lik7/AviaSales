@@ -17,15 +17,10 @@ public class TicketBlock {
         this.element = element;
     }
 
-    //List <WebElement> startCity = element.findElements(startCityOfTicket);//города вылета в билете
-
-    //получаем одни билет
+    //получаем один билет
     public Ticket getTicket() {
         String price = element.findElement(priceOfTicket).getText();
-        //String startCity = element.findElement(startCityOfTicket).getText();
         List <WebElement> startCity = element.findElements(startCityOfTicket);//города вылета в билете
-
-        //String finishCity = element.findElement(finishCityOfTicket).getText();
         List<WebElement> finishCity = element.findElements(finishCityOfTicket);
         String startDate = element.findElement(startDateOfTicket).getText();
 

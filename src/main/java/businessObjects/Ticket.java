@@ -17,10 +17,9 @@ public class Ticket {
         Matcher m = p.matcher(price);
         String str = null;
         if (m.find()) {
-            //System.out.println(m.group());
             str = m.group();
         }
-        System.out.println("Цена из класса Ticket " + Integer.parseInt(str));
+        //System.out.println("Цена из класса Ticket " + Integer.parseInt(str));
         return Integer.parseInt(str);
     }
 
@@ -30,14 +29,13 @@ public class Ticket {
     }
 
     public String getStartCityThereTicket() {
-        System.out.println("Метод getStartCityThereTicket класса Ticket " + startCityThereTicket);
-
+       // System.out.println("Метод getStartCityThereTicket класса Ticket " + startCityThereTicket);
         return startCityThereTicket;
     }
 
     public Ticket setStartCityThereTicket(String startCityThereTicket) {
         this.startCityThereTicket = startCityThereTicket;
-        System.out.println("Метод setStartCityThereTicket класса Ticket " + startCityThereTicket);
+        //System.out.println("Метод setStartCityThereTicket класса Ticket " + startCityThereTicket);
         return this;
     }
 
@@ -47,7 +45,7 @@ public class Ticket {
 
     public Ticket setFinishCityThereTicket(String finishCityThereTicket) {
         this.finishCityThereTicket = finishCityThereTicket;
-        System.out.println("Метод setFinishCityThereTicket класса Ticket " + finishCityThereTicket);
+        //System.out.println("Метод setFinishCityThereTicket класса Ticket " + finishCityThereTicket);
         return this;
     }
 
@@ -57,7 +55,7 @@ public class Ticket {
 
     public Ticket setStartCityBackTicket(String startCityBackTicket) {
         this.startCityBackTicket = startCityBackTicket;
-        System.out.println("Метод setStartCityBackTicket класса Ticket " + startCityBackTicket);
+        //System.out.println("Метод setStartCityBackTicket класса Ticket " + startCityBackTicket);
         return this;
     }
 
@@ -67,7 +65,7 @@ public class Ticket {
 
     public Ticket setFinishCityBackTicket(String finishCityBackTicket) {
         this.finishCityBackTicket = finishCityBackTicket;
-        System.out.println("Метод setFinishCityBackTicket класса Ticket " + finishCityBackTicket);
+        //System.out.println("Метод setFinishCityBackTicket класса Ticket " + finishCityBackTicket);
         return this;
     }
 
@@ -80,8 +78,3 @@ public class Ticket {
         return this;
     }
 }
-
-/*    public Ticket setStartCityThereTicket(String startCityThereTicket) {
-        this.startCityThereTicket = startCityThereTicket;
-        return this;
-    }*/

@@ -1,13 +1,11 @@
 package pages;
 
+import businessObjects.PassengersBlock;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import testData.Dates;
-
-import java.util.List;
 
 public class HomePage {
     private WebDriver driver;
@@ -23,8 +21,8 @@ public class HomePage {
     private By thereDate = By.xpath("//*[contains(@aria-label, \"" + Dates.getDateDDMmmYYYYTomorrow_EN() + "\")]");//дата вылета
     private By backDate = By.xpath("//*[contains(@aria-label, \"" + Dates.getDateDDMmmYYYYAfterTomorrow_EN() + "\")]");//дата прилета
 
+    private By passengersBlock = By.xpath("//*[@class=\"additional-fields__inner-wrap\"]");//блок пассажиры
     private By passengersAndClassField = By.cssSelector("[data-test-id=\"passengers-field\"]");//пассажиры
-    private By addRemovePassengerBtn = By.cssSelector(".additional-fields__passenger-control");
 
     private By findBtn = By.cssSelector("[data-test-id=\"form-submit\"]");//кнопка Найти
 
@@ -53,10 +51,12 @@ public class HomePage {
     }
 
     @Step("Выбор пассажиров и класса")
-    public void addRemovePassenger() {
+    public void addPassenger(int countAdults, int countChildren) {
         driver.findElement(passengersAndClassField).click();
-        List<WebElement> addRemoveBtn = driver.findElements(addRemovePassengerBtn);
-        addRemoveBtn.get(3).click();
+
+        PassengersBlock passengers = new PassengersBlock(driver.findElement(passengersBlock));
+        passengers.addAdults(countAdults);
+        passengers.addChildren(countChildren);
     }
 
     @Step("Нажать кнопку Найти")
